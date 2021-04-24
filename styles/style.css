@@ -2,8 +2,6 @@ html {
   box-sizing: border-box;
 }
 
-@font-face {font-family: "Adobe Garamond Pro"; src: url("//db.onlinewebfonts.com/t/bb536c8902851436d96159474d9050b1.eot"); src: url("//db.onlinewebfonts.com/t/bb536c8902851436d96159474d9050b1.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/bb536c8902851436d96159474d9050b1.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/bb536c8902851436d96159474d9050b1.woff") format("woff"), url("//db.onlinewebfonts.com/t/bb536c8902851436d96159474d9050b1.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/bb536c8902851436d96159474d9050b1.svg#Adobe Garamond Pro") format("svg"); }
-
 *, *:before, *:after {
   box-sizing: inherit;
 }
