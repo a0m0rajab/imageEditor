@@ -79,7 +79,19 @@
                     <button onclick="watermark()">Add water mark</button>
                     <button onclick="download()">Download</button>
                     <button onclick="previewAndSave()">Add water mark and save</button>
-                    <input type='file' accept='image/*' onchange='openFile(event)'><br>
+                    <input type='file' accept='image/*' onchange='openFile(event)' multiple><br>
+                </div>
+                <div class="col">
+                    <h3>Water Marks</h3>
+                    <label for="watermark1">First watermark</label>
+                    <input type="text" id="watermark1" value="Hello World" />
+                    <label for="watermark2">Second watermark</label>
+                    <input type="text" id="watermark2" value="Lorem Ipsum teseting the world" />
+                    <label for="filename">Downloaded Filename</label>
+                    <input type="text" id="filename" value="Edited file" />
+                    <button onclick="nextButton()">next image <span id="imagesInfo"></span></button>
+
+
                 </div>
 
 

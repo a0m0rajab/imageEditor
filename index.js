@@ -69,10 +69,11 @@ function setInputsFromRegion(region) {
     inputWidth.value = region.width
     inputHeight.value = region.height
 }
-
+let dragged = false;
 crop
     .on('start', function (region) {
         console.log("start")
+        dragged = true
         setInputsFromRegion(region)
     })
     .on('move', function (region) {
@@ -85,14 +86,14 @@ crop
     })
     .on('change', function (region) {
         console.log("change")
-        if (init) {
+        if (init || !dragged) {
             loadPreviewImage(region);
             init = false;
         }
-
         setInputsFromRegion(region)
     })
     .on('end', function (region) {
+        dragged = false
         console.log("end")
         loadPreviewImage(region)
         setInputsFromRegion(region)
@@ -122,7 +123,7 @@ function watermark() {
     ctx.fillStyle = "white";
     ctx.textAlign = 'center';
     ctx.font = 'italic bold ' + canvas.width * 0.2 + 'px Adobe Garamond Pro';
-    ctx.fillText("Hello World", cnvs.width / 2, cnvs.height / 2);
+    ctx.fillText(getTextByID("watermark1"), cnvs.width / 2, cnvs.height / 2);
     ctx.globalAlpha = 0.9
     ctx.fillStyle = "#757575";
     ctx.textAlign = 'center';
@@ -130,7 +131,7 @@ function watermark() {
     roundRect(ctx, x, y, width, height, 50, true);
     ctx.font = canvas.width * 0.025 + 'px ABeeZee';
     ctx.fillStyle = "black";
-    ctx.fillText("Lorem ipsum data information we are the best", cnvs.width / 2, cnvs.height - 50);
+    ctx.fillText(getTextByID("watermark2"), cnvs.width / 2, cnvs.height - 50);
 }
 
 /**
@@ -186,21 +187,51 @@ function roundRect(ctx, x, y, width, height, radius, fill, stroke) {
 
 }
 
-var openFile = function (file) {
-    var input = file.target;
+function handleFiles(file) {
+    let input = file.target;
+    return input.files
+}
+
+function loadFile(file) {
     var reader = new FileReader();
     reader.onload = function () {
         var dataURL = reader.result;
         crop.setImage(dataURL)
+        crop.revalidateAndPaint()
     };
-    reader.readAsDataURL(input.files[0]);
-};
+    reader.readAsDataURL(file);
+}
 
+let globalFileList;
+var openFile = function (file) {
+    fileNumber = 0
+    globalFileList = handleFiles(file)
+    next()
+};
+function setTextByID(id, text) {
+    document.getElementById(id).innerText = text
+}
+function getTextByID(id) {
+    return document.getElementById(id).value
+}
 function download() {
     let link = document.createElement('a');
-    link.download = 'filename.png';
+    link.download = getTextByID("filename") + '.png';
     link.href = document.getElementById('canvas').toDataURL()
     link.click();
+}
+let fileNumber = 0;
+function next() {
+    let totalFiles = globalFileList.length
+    setTextByID("imagesInfo", `${fileNumber + 1}/${totalFiles}`)
+    if (fileNumber < totalFiles) {
+        loadFile(globalFileList[fileNumber])
+        fileNumber++;
+    }
+}
+function nextButton() {
+    download()
+    next()
 }
 
 function previewAndSave() {
