@@ -23,10 +23,12 @@ Image editor is a web based image cropper and water mark adder, it could definet
 - [ ] Add layers options to let the user set the needed information
   - [ ] Could add different layers to not have burn the PC
 - [ ] Add user inputs for water marks (easier/faster)
-  - [ ] text fields is enough
+  - [x] text fields is enough
 - [ ] add image input by URL 
-- [ ] Add multiple image support and next button 
-- [ ] Add miscs options: Downloaded file name, showing preview or not etc.  
+- [x] Add multiple image support and next button 
+- [ ] Add miscs options: 
+  - [x] Downloaded file name
+  - [ ] showing preview or not.  
 
 # Kudos:
 
